@@ -9,7 +9,7 @@ export const TechTag = ({ label, className }: TechTagProps) => {
   return (
     <span
       className={cn(
-        "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium",
+        "inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium",
         "bg-tag text-tag-foreground",
         className
       )}

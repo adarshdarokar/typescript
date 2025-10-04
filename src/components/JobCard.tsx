@@ -29,25 +29,25 @@ export const JobCard = ({
   onEdit,
 }: JobCardProps) => {
   return (
-    <div className="bg-card rounded-xl p-6 border border-border hover:shadow-md transition-all duration-200">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-start gap-4">
+    <div className="bg-card rounded-lg p-4 border border-border hover:shadow-sm transition-all duration-200">
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-start gap-3">
           <div
-            className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-lg"
+            className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-base flex-shrink-0"
             style={{ backgroundColor: logoColor }}
           >
             {companyLogo}
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
-            <p className="text-sm text-muted-foreground">{company}</p>
+          <div className="min-w-0">
+            <h3 className="text-base font-semibold text-foreground mb-0.5">{title}</h3>
+            <p className="text-xs text-muted-foreground">{company}</p>
           </div>
         </div>
 
         <Button
           variant="outline"
           size="sm"
-          className="gap-1 hover:bg-accent"
+          className="gap-1 hover:bg-accent h-7 px-2 text-xs flex-shrink-0"
           onClick={onEdit}
         >
           <Edit className="w-3 h-3" />
@@ -55,28 +55,28 @@ export const JobCard = ({
         </Button>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-1.5 mb-3">
         {technologies.map((tech, index) => (
           <TechTag key={index} label={tech} />
         ))}
       </div>
 
-      <div className="border-t border-dashed border-border pt-4 space-y-3">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <MapPin className="w-4 h-4" />
-          <span>{location}</span>
+      <div className="border-t border-dashed border-border pt-3 space-y-2.5">
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+          <span className="line-clamp-1">{location}</span>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-sm">
-              <DollarSign className="w-4 h-4 text-muted-foreground" />
+        <div className="flex items-center justify-between gap-2 flex-wrap">
+          <div className="flex items-center gap-3 flex-wrap text-xs">
+            <div className="flex items-center gap-1.5">
+              <DollarSign className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
               <span className="text-foreground font-medium">Job Offer</span>
               <span className="text-muted-foreground">{salary}</span>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="w-4 h-4" />
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Clock className="w-3.5 h-3.5 flex-shrink-0" />
               <span>Posted</span>
               <span>{postedTime}</span>
             </div>

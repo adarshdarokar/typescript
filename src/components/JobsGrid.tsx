@@ -91,7 +91,7 @@ const mockJobs: Job[] = [
 export const JobsGrid = () => {
   return (
     <div className="bg-card rounded-2xl p-6 shadow-sm h-full overflow-y-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-3">
         {mockJobs.map((job) => (
           <JobCard
             key={job.id}
