@@ -29,8 +29,8 @@ export const JobCard = ({
   onEdit,
 }: JobCardProps) => {
   return (
-    <div className="bg-card rounded-lg p-4 border border-border hover:shadow-sm transition-all duration-200">
-      <div className="flex items-start justify-between mb-3">
+    <div className="bg-card rounded-lg p-5 border border-border hover:shadow-sm transition-all duration-200">
+      <div className="flex items-start justify-between mb-3.5">
         <div className="flex items-start gap-3">
           <div
             className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-base flex-shrink-0"
@@ -55,13 +55,13 @@ export const JobCard = ({
         </Button>
       </div>
 
-      <div className="flex flex-wrap gap-1.5 mb-3">
+      <div className="flex flex-wrap gap-1.5 mb-3.5">
         {technologies.map((tech, index) => (
           <TechTag key={index} label={tech} />
         ))}
       </div>
 
-      <div className="border-t border-dashed border-border pt-3 space-y-2.5">
+      <div className="border-t border-dashed border-border pt-3.5 space-y-2.5 bg-muted/30 -mx-5 -mb-5 px-5 pb-5 rounded-b-lg">
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
           <span className="line-clamp-1">{location}</span>

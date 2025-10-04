@@ -6,38 +6,18 @@ interface HeaderProps {
   title: string;
   userName: string;
   userRole: string;
-  onSetCatalog?: () => void;
-  onCreateJob?: () => void;
 }
 
 export const Header = ({
   title,
   userName,
   userRole,
-  onSetCatalog,
-  onCreateJob,
 }: HeaderProps) => {
   return (
     <header className="bg-card rounded-2xl p-6 flex items-center justify-between shadow-sm">
       <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
 
       <div className="flex items-center gap-4">
-        <Button
-          variant="default"
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6"
-          onClick={onSetCatalog}
-        >
-          Set Catalog
-        </Button>
-
-        <Button
-          variant="default"
-          className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-medium px-6"
-          onClick={onCreateJob}
-        >
-          Create Job +
-        </Button>
-
         <button className="relative p-2 hover:bg-accent rounded-full transition-colors">
           <Bell className="w-5 h-5 text-foreground" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>

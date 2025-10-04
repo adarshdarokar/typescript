@@ -19,8 +19,6 @@ const Index = () => {
               title="Jobs"
               userName="Adarsh Darokar"
               userRole="Admin"
-              onSetCatalog={() => console.log("Set Catalog clicked")}
-              onCreateJob={() => console.log("Create Job clicked")}
             />
           </div>
 

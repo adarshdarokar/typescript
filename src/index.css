@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 10% 96%;
+    --background: 220 15% 92%;
     --foreground: 220 10% 10%;
 
     --card: 0 0% 100%;
@@ -23,7 +23,7 @@ All colors MUST be HSL.
     --secondary: 220 10% 10%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 8% 94%;
+    --muted: 220 10% 88%;
     --muted-foreground: 220 8% 40%;
 
     --accent: 220 10% 92%;
