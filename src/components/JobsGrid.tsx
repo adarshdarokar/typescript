@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { JobCard } from "./JobCard";
 import { Button } from "@/components/ui/button";
+import { CreateJobDialog } from "./CreateJobDialog";
+import { toast } from "@/hooks/use-toast";
 
 interface Job {
   id: string;
@@ -90,6 +93,32 @@ const mockJobs: Job[] = [
 ];
 
 export const JobsGrid = () => {
+  const [jobs, setJobs] = useState<Job[]>(mockJobs);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleCreateJob = (data: any) => {
+    const newJob: Job = {
+      id: String(jobs.length + 1),
+      company: data.company,
+      companyLogo: data.company.charAt(0).toUpperCase(),
+      title: data.role,
+      technologies: ["React Js", "Typescript", "Next Js"],
+      location: data.location2 
+        ? `${data.location1} | ${data.location2}` 
+        : data.location1,
+      salary: data.salary,
+      postedTime: "Just now",
+      status: "open",
+      logoColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+    };
+    
+    setJobs([newJob, ...jobs]);
+    toast({
+      title: "Job Created",
+      description: `${data.role} position at ${data.company} has been created successfully.`,
+    });
+  };
+
   return (
     <div className="bg-card rounded-2xl shadow-sm h-full overflow-hidden flex flex-col">
       {/* Action Buttons */}
@@ -105,16 +134,22 @@ export const JobsGrid = () => {
         <Button
           variant="default"
           className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-medium px-6"
-          onClick={() => console.log("Create Job clicked")}
+          onClick={() => setIsDialogOpen(true)}
         >
           Create Job +
         </Button>
       </div>
 
+      <CreateJobDialog
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        onSubmit={handleCreateJob}
+      />
+
       {/* Jobs Grid - Scrollable */}
       <div className="flex-1 overflow-y-auto px-6 pb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-2.5">
-          {mockJobs.map((job) => (
+          {jobs.map((job) => (
             <JobCard
               key={job.id}
               company={job.company}

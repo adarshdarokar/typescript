@@ -54,4 +54,14 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Dialog overlay blur effect */
+  [data-state="open"] ~ .fixed.inset-0 {
+    backdrop-filter: blur(8px);
+  }
+  
+  .dialog-overlay {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
