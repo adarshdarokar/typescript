@@ -16,6 +16,7 @@ interface Job {
   postedTime: string;
   status: "open" | "closed";
   logoColor: string;
+  description?: string;
 }
 
 const mockJobs: Job[] = [
@@ -127,16 +128,21 @@ export const JobsGrid = () => {
     setIsEditSkillsOpen(true);
   };
 
-  const handleSaveSkills = (updatedSkills: string[]) => {
+  const handleSaveSkills = (data: { skills: string[]; jobTitle: string; jobDescription: string }) => {
     if (editingJobId) {
       setJobs(jobs.map(job => 
         job.id === editingJobId 
-          ? { ...job, technologies: updatedSkills }
+          ? { 
+              ...job, 
+              technologies: data.skills,
+              title: data.jobTitle,
+              description: data.jobDescription
+            }
           : job
       ));
       toast({
-        title: "Skills Updated",
-        description: "Job skills have been updated successfully.",
+        title: "Job Updated",
+        description: "Job details have been updated successfully.",
       });
     }
     setEditingJobId(null);
@@ -175,6 +181,8 @@ export const JobsGrid = () => {
         open={isEditSkillsOpen}
         onOpenChange={setIsEditSkillsOpen}
         skills={currentEditingJob?.technologies || []}
+        jobTitle={currentEditingJob?.title || ""}
+        jobDescription={currentEditingJob?.description || ""}
         onSave={handleSaveSkills}
       />
 

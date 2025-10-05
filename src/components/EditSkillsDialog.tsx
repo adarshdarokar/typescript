@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Plus } from "lucide-react";
+import { X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -8,23 +8,30 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { TechTag } from "./TechTag";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 interface EditSkillsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   skills: string[];
-  onSave: (skills: string[]) => void;
+  jobTitle: string;
+  jobDescription?: string;
+  onSave: (data: { skills: string[]; jobTitle: string; jobDescription: string }) => void;
 }
 
 export const EditSkillsDialog = ({
   open,
   onOpenChange,
   skills,
+  jobTitle,
+  jobDescription = "",
   onSave,
 }: EditSkillsDialogProps) => {
   const [currentSkills, setCurrentSkills] = useState<string[]>(skills);
   const [newSkill, setNewSkill] = useState("");
+  const [category, setCategory] = useState(jobTitle);
+  const [description, setDescription] = useState(jobDescription);
 
   const handleAddSkill = () => {
     if (newSkill.trim()) {
@@ -38,7 +45,11 @@ export const EditSkillsDialog = ({
   };
 
   const handleSave = () => {
-    onSave(currentSkills);
+    onSave({
+      skills: currentSkills,
+      jobTitle: category,
+      jobDescription: description,
+    });
     onOpenChange(false);
   };
 
@@ -59,48 +70,57 @@ export const EditSkillsDialog = ({
         </DialogHeader>
 
         <div className="px-6 py-6 space-y-5">
-          <div className="space-y-3">
-            <label className="text-sm text-primary font-normal">
-              Current Skills
-            </label>
-            <div className="flex flex-wrap gap-2 min-h-[60px] p-3 border border-border rounded-md bg-background">
-              {currentSkills.length === 0 ? (
-                <span className="text-sm text-muted-foreground">No skills added yet</span>
-              ) : (
-                currentSkills.map((skill, index) => (
-                  <div key={index} className="relative group">
-                    <TechTag label={skill} />
+          <div className="space-y-2">
+            <Label className="text-sm text-primary font-normal">
+              What are the skills required ?
+            </Label>
+            <div className="relative">
+              <div className="flex flex-wrap gap-2 min-h-[44px] p-2.5 border border-border rounded-md bg-background">
+                {currentSkills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary/10 text-primary text-sm rounded"
+                  >
+                    {skill}
                     <button
                       onClick={() => handleRemoveSkill(index)}
-                      className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-destructive text-destructive-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="hover:text-primary/70 transition-colors"
                     >
-                      <X className="w-2.5 h-2.5" />
+                      <X className="w-3 h-3" />
                     </button>
-                  </div>
-                ))
-              )}
+                  </span>
+                ))}
+                <input
+                  type="text"
+                  value={newSkill}
+                  onChange={(e) => setNewSkill(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="flex-1 min-w-[120px] bg-transparent outline-none text-sm"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="space-y-3">
-            <label className="text-sm text-primary font-normal">
-              Add New Skill
-            </label>
-            <div className="flex gap-2">
-              <Input
-                value={newSkill}
-                onChange={(e) => setNewSkill(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="bg-background border-border"
-              />
-              <Button
-                type="button"
-                onClick={handleAddSkill}
-                className="bg-foreground text-background hover:bg-foreground/90 px-4"
-              >
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
+          <div className="space-y-2">
+            <Label className="text-sm text-primary font-normal">
+              What is the job categories ?
+            </Label>
+            <Input
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="bg-background border-border"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-sm text-primary font-normal">
+              Job Descriptions
+            </Label>
+            <Textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="bg-background border-border min-h-[120px] resize-none"
+            />
           </div>
 
           <div className="flex justify-end pt-2">
