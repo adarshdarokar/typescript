@@ -2,6 +2,7 @@ import { useState } from "react";
 import { JobCard } from "./JobCard";
 import { Button } from "@/components/ui/button";
 import { CreateJobDialog } from "./CreateJobDialog";
+import { EditSkillsDialog } from "./EditSkillsDialog";
 import { toast } from "@/hooks/use-toast";
 
 interface Job {
@@ -95,6 +96,8 @@ const mockJobs: Job[] = [
 export const JobsGrid = () => {
   const [jobs, setJobs] = useState<Job[]>(mockJobs);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isEditSkillsOpen, setIsEditSkillsOpen] = useState(false);
+  const [editingJobId, setEditingJobId] = useState<string | null>(null);
 
   const handleCreateJob = (data: any) => {
     const newJob: Job = {
@@ -118,6 +121,28 @@ export const JobsGrid = () => {
       description: `${data.role} position at ${data.company} has been created successfully.`,
     });
   };
+
+  const handleEditSkills = (jobId: string) => {
+    setEditingJobId(jobId);
+    setIsEditSkillsOpen(true);
+  };
+
+  const handleSaveSkills = (updatedSkills: string[]) => {
+    if (editingJobId) {
+      setJobs(jobs.map(job => 
+        job.id === editingJobId 
+          ? { ...job, technologies: updatedSkills }
+          : job
+      ));
+      toast({
+        title: "Skills Updated",
+        description: "Job skills have been updated successfully.",
+      });
+    }
+    setEditingJobId(null);
+  };
+
+  const currentEditingJob = jobs.find(job => job.id === editingJobId);
 
   return (
     <div className="bg-card rounded-2xl shadow-sm h-full overflow-hidden flex flex-col">
@@ -146,9 +171,16 @@ export const JobsGrid = () => {
         onSubmit={handleCreateJob}
       />
 
+      <EditSkillsDialog
+        open={isEditSkillsOpen}
+        onOpenChange={setIsEditSkillsOpen}
+        skills={currentEditingJob?.technologies || []}
+        onSave={handleSaveSkills}
+      />
+
       {/* Jobs Grid - Scrollable */}
       <div className="flex-1 overflow-y-auto px-6 pb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-3">
           {jobs.map((job) => (
             <JobCard
               key={job.id}
@@ -161,7 +193,7 @@ export const JobsGrid = () => {
               postedTime={job.postedTime}
               status={job.status}
               logoColor={job.logoColor}
-              onEdit={() => console.log(`Edit job ${job.id}`)}
+              onEdit={() => handleEditSkills(job.id)}
             />
           ))}
         </div>
