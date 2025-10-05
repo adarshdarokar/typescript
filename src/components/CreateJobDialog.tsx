@@ -60,19 +60,11 @@ export const CreateJobDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[550px] bg-card border-border p-0 gap-0">
+      <DialogContent className="sm:max-w-[440px] bg-card border-border p-0 gap-0">
         <DialogHeader className="px-6 pt-6 pb-4 border-b border-border">
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-lg font-semibold text-foreground">
-              Edit Form
-            </DialogTitle>
-            <button
-              onClick={() => onOpenChange(false)}
-              className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
+          <DialogTitle className="text-lg font-semibold text-foreground text-center">
+            Edit Form
+          </DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -87,7 +79,6 @@ export const CreateJobDialog = ({
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Sheryians Coding School"
                       {...field}
                       className="bg-background border-border"
                     />
@@ -107,7 +98,6 @@ export const CreateJobDialog = ({
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Frontend Developer"
                       {...field}
                       className="bg-background border-border"
                     />
@@ -128,7 +118,6 @@ export const CreateJobDialog = ({
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="6 LPA - 7 LPA"
                         {...field}
                         className="bg-background border-border"
                       />
@@ -148,7 +137,6 @@ export const CreateJobDialog = ({
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="3"
                         {...field}
                         className="bg-background border-border"
                       />
@@ -169,7 +157,6 @@ export const CreateJobDialog = ({
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Bhopal, India"
                       {...field}
                       className="bg-background border-border"
                     />
@@ -189,7 +176,6 @@ export const CreateJobDialog = ({
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Bhopal, India"
                       {...field}
                       className="bg-background border-border"
                     />
