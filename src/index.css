@@ -8,10 +8,10 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 15% 92%;
+    --background: 220 15% 88%;
     --foreground: 220 10% 10%;
 
-    --card: 0 0% 100%;
+    --card: 225 25% 97%;
     --card-foreground: 220 10% 10%;
 
     --popover: 0 0% 100%;
@@ -23,7 +23,7 @@ All colors MUST be HSL.
     --secondary: 220 10% 10%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 10% 88%;
+    --muted: 220 12% 90%;
     --muted-foreground: 220 8% 40%;
 
     --accent: 220 10% 92%;
@@ -43,6 +43,9 @@ All colors MUST be HSL.
 
     --tag-background: 220 80% 95%;
     --tag-foreground: 226 100% 62%;
+    
+    --edit-button: 220 10% 10%;
+    --edit-button-foreground: 0 0% 100%;
   }
 }
 

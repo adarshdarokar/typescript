@@ -45,9 +45,9 @@ export const JobCard = ({
         </div>
 
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
-          className="gap-1 hover:bg-accent h-7 px-2 text-xs flex-shrink-0"
+          className="gap-1 h-7 px-2.5 text-xs flex-shrink-0 rounded-md"
           onClick={onEdit}
         >
           <Edit className="w-3 h-3" />
