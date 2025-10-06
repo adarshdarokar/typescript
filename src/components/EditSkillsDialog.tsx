@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +34,16 @@ export const EditSkillsDialog = ({
   const [category, setCategory] = useState(jobTitle);
   const [description, setDescription] = useState(jobDescription);
 
+  // Sync dialog fields with the currently selected job when opening
+  useEffect(() => {
+    if (open) {
+      setCurrentSkills(skills);
+      setCategory(jobTitle);
+      setDescription(jobDescription);
+      setNewSkill("");
+    }
+  }, [open, skills, jobTitle, jobDescription]);
+
   const handleAddSkill = () => {
     if (newSkill.trim()) {
       setCurrentSkills([...currentSkills, newSkill.trim()]);
@@ -45,15 +56,19 @@ export const EditSkillsDialog = ({
   };
 
   const handleSave = () => {
+    const skillsToSave = newSkill.trim()
+      ? [...currentSkills, newSkill.trim()]
+      : currentSkills;
+
     onSave({
-      skills: currentSkills,
+      skills: skillsToSave,
       jobTitle: category,
       jobDescription: description,
     });
     onOpenChange(false);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleAddSkill();
@@ -67,6 +82,7 @@ export const EditSkillsDialog = ({
           <DialogTitle className="text-lg font-semibold text-foreground text-center">
             Edit Skills
           </DialogTitle>
+          <DialogDescription className="sr-only">Edit job details</DialogDescription>
         </DialogHeader>
 
         <div className="px-6 py-6 space-y-5">
@@ -94,7 +110,7 @@ export const EditSkillsDialog = ({
                   type="text"
                   value={newSkill}
                   onChange={(e) => setNewSkill(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={handleKeyDown}
                   className="flex-1 min-w-[120px] bg-transparent outline-none text-sm"
                 />
               </div>
