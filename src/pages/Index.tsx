@@ -4,15 +4,15 @@ import { JobsGrid } from "@/components/JobsGrid";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background p-4 md:p-6">
-      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-3 md:gap-4 h-[calc(100vh-2rem)] md:h-[calc(100vh-3rem)]">
+    <div className="min-h-screen bg-background p-3 md:p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-2 md:gap-3 h-[calc(100vh-1.5rem)] md:h-[calc(100vh-2rem)]">
         {/* Sidebar - Hidden on mobile, shown on large screens */}
         <div className="hidden lg:block h-full">
           <Sidebar activeItem="jobs" />
         </div>
 
         {/* Main Content Area */}
-        <div className="flex flex-col gap-3 md:gap-4 h-full overflow-hidden">
+        <div className="flex flex-col gap-2 md:gap-3 h-full overflow-hidden">
           {/* Header */}
           <div className="flex-shrink-0">
             <Header

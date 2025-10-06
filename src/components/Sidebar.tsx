@@ -15,12 +15,12 @@ const menuItems = [
 
 export const Sidebar = ({ activeItem = "jobs" }: SidebarProps) => {
   return (
-    <aside className="bg-card rounded-2xl p-6 flex flex-col h-full shadow-sm">
-      <div className="mb-10">
-        <h1 className="text-2xl font-bold text-foreground">Require.</h1>
+    <aside className="bg-card rounded-xl p-5 flex flex-col h-full shadow-sm">
+      <div className="mb-8">
+        <h1 className="text-xl font-bold text-foreground">Require.</h1>
       </div>
 
-      <nav className="flex-1 space-y-1">
+      <nav className="flex-1 space-y-0.5">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.id === activeItem;
@@ -29,13 +29,13 @@ export const Sidebar = ({ activeItem = "jobs" }: SidebarProps) => {
             <button
               key={item.id}
               className={cn(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left",
+                "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left",
                 isActive
                   ? "bg-accent text-foreground font-medium"
                   : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
               )}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="w-4 h-4" />
               <span className="text-sm">{item.label}</span>
             </button>
           );
