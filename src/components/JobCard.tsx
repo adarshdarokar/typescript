@@ -55,11 +55,13 @@ export const JobCard = ({
         </Button>
       </div>
 
-      <div className="flex flex-wrap gap-1.5 mb-3.5">
-        {technologies.map((tech, index) => (
-          <TechTag key={index} label={tech} />
-        ))}
-      </div>
+      {technologies.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-3.5">
+          {technologies.map((tech, index) => (
+            <TechTag key={index} label={tech} />
+          ))}
+        </div>
+      )}
 
       <div className="border-t border-dashed border-border pt-3.5 space-y-2.5 bg-muted/30 -mx-5 -mb-5 px-5 pb-5 rounded-b-lg">
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
