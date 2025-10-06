@@ -44,10 +44,35 @@ export const EditSkillsDialog = ({
     }
   }, [open, skills, jobTitle, jobDescription]);
 
+  const normalizeSkill = (s: string) => s.replace(/\s+/g, " ").trim();
+
+  const addSkills = (skills: string[]) => {
+    setCurrentSkills((prev) => {
+      const prevLower = prev.map((p) => p.toLowerCase());
+      const toAdd = skills
+        .map(normalizeSkill)
+        .filter(Boolean)
+        .filter((s) => !prevLower.includes(s.toLowerCase()));
+      return toAdd.length ? [...prev, ...toAdd] : prev;
+    });
+  };
+
   const handleAddSkill = () => {
     if (newSkill.trim()) {
-      setCurrentSkills([...currentSkills, newSkill.trim()]);
+      addSkills([newSkill]);
       setNewSkill("");
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.includes(",")) {
+      const parts = value.split(",");
+      const finished = parts.slice(0, -1);
+      if (finished.length) addSkills(finished);
+      setNewSkill(parts[parts.length - 1]);
+    } else {
+      setNewSkill(value);
     }
   };
 
@@ -69,9 +94,14 @@ export const EditSkillsDialog = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleAddSkill();
+    if (e.key === "Enter" || e.key === "," || e.key === "Tab") {
+      if (newSkill.trim()) {
+        e.preventDefault();
+        addSkills([newSkill]);
+        setNewSkill("");
+      } else if (e.key === ",") {
+        e.preventDefault();
+      }
     }
   };
 
@@ -109,7 +139,7 @@ export const EditSkillsDialog = ({
                 <input
                   type="text"
                   value={newSkill}
-                  onChange={(e) => setNewSkill(e.target.value)}
+                  onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
                   className="flex-1 min-w-[120px] bg-transparent outline-none text-sm"
                 />
